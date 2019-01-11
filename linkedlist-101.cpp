@@ -50,9 +50,10 @@ class LinkedList
 		current = head; //initializing current
 		while(current!=NULL)// loop to swipe throughj the link list 
 		{
-			cout<<current->data<<" ";//printing the data in each
+			cout<<current->data<<"-> ";//printing the data in each
 			current=current->nxt;//modifing the current node
 		}
+		cout<<"NULL"<<endl;
 	}
 	//insertAT
 	void insertAt(int pos,int value)
@@ -66,15 +67,26 @@ class LinkedList
 			while(i<pos-1)//loop acessing each element
 			{
 				current=current->nxt;//acessing the next element
+				if(current==NULL)
+				{
+					cout<<"\nThat many elements are not present in the linked list\n";
+					break;
+				}
 				i++;//increamenting i
+				
 			}
-			temp->nxt=current->nxt;//storing the adress of (pos+1)th element in the new node
-			current->nxt=temp;//storing the address of new node in (pos-1)th position
-			if(temp->nxt==NULL)
+			if(current!=NULL)
 			{
-				last=temp;
+				temp->nxt=current->nxt;//storing the adress of (pos+1)th element in the new node
+				current->nxt=temp;//storing the address of new node in (pos-1)th position
+		
+				if(temp->nxt==NULL)
+				{
+					last=temp;
+				}
 			}
 		}
+		
 		else
 		{
 			temp->nxt=head;
@@ -116,6 +128,17 @@ class LinkedList
 			current->nxt=temp->nxt->nxt;
 		}
 	}
+	int countItems()
+	{
+		int i=0;
+		Node*current=head;
+		while(current!=NULL)
+		{
+			current=current->nxt;
+			i++;
+		}
+		return i;
+	}
 };
 int main()
 {
@@ -129,5 +152,6 @@ int main()
 	A.insert(11);
 	A.DeleteAt(7);
 	A.display();
+	cout<<A.countItems();
 	return 0;
 }
